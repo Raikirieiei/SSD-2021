@@ -52,8 +52,8 @@ eth
                 span.ml-3
                   = link_to product_path(a), method: :delete, data: { confirm: "Are you sure?" } do
                     i.fas.fa-trash
-
-div.mb-2
+-if current_admin
+  div.mb-2
     = link_to new_product_path do
       = button_tag 'Add new Product', class: 'btn btn-primary'
 
