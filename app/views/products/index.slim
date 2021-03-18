@@ -1,0 +1,63 @@
+.row
+  .col-6
+    h1 Genshin Impact ID Market
+  .col-6
+    .float-right
+      -if current_admin
+        span.ml-3 = current_admin.email
+        span.ml-3 = link_to 'Logout', destroy_admin_session_path , method: :delete
+      -else
+        span.ml-3 = link_to 'Login', admin_session_path
+      
+eth
+.row
+  .col.
+    = form_tag products_path, method: :get do
+      = text_field_tag 'search', @search, placeholder: 'Type something',
+        class: 'form-control'
+
+.row.mt-2
+  .col
+    table.table.table-bordered.table-striped.table-hover
+      thead.thead-dark
+        tr
+          th ID
+          th Title
+          th Body
+          / th No. Comments
+          th Server
+          th Stock
+          th Created at
+          th Updated at
+          th Action
+      tbody
+        - @products.each do |a|
+          tr
+            td = a.id
+            td.font-weight-bold = a.title
+            td = a.body
+            / td = a.comments.count
+            td = a.server
+            td = a.stock
+            td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
+            td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
+            td
+              span
+                = link_to product_path(a) do
+                  i.fas.fa-eye
+              -if current_admin
+                span.ml-3
+                  = link_to edit_product_path(a) do
+                    i.fas.fa-pen
+                span.ml-3
+                  = link_to product_path(a), method: :delete, data: { confirm: "Are you sure?" } do
+                    i.fas.fa-trash
+
+div.mb-2
+    = link_to new_product_path do
+      = button_tag 'Add new Product', class: 'btn btn-primary'
+
+.row
+  .col-6
+    = paginate @products
+
