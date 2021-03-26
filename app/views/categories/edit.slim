@@ -6,5 +6,5 @@ br
 h3 Add new product to this category
 div = form_with model: [@category, @category.connect_categories.build] do |f|
     div = f.collection_select :result, Product.all ,:body,:title
-    div = f.submit 'add product'
+    div = f.submit 'Add Product'
     
