@@ -1,0 +1,10 @@
+= form_with model: category do |f|
+  div = f.text_field :tag, placeholder: 'Title'
+  div = f.text_area :description, placeholder: 'Write content here'
+/ h3 Add new product to this category
+/ div = form_with model: [@category, @category.connect_categories.build] do |f|
+/     div = f.text_field :tag, placeholder: 'Title'
+/     div = f.text_area :description, placeholder: 'Write content here'
+/     div = f.collection_select :result, Product.all ,:body,:title
+/     div = f.submit 'add product'
+

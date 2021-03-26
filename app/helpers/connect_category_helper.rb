@@ -1,0 +1,2 @@
+module ConnectCategoryHelper
+end

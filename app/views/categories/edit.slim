@@ -1,0 +1,10 @@
+h1 Edit category
+
+div = link_to 'Back', categories_path
+br
+= render 'form', category: @category
+h3 Add new product to this category
+div = form_with model: [@category, @category.connect_categories.build] do |f|
+    div = f.collection_select :result, Product.all ,:body,:title
+    div = f.submit 'add product'
+    

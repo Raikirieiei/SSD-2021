@@ -1,0 +1,10 @@
+h1 = @category.tag
+div = link_to 'Back', categories_path
+hr
+h2 = 'description'
+div = @category.description
+hr
+h2 = 'id list'
+div
+    - @category.products.each do |f|
+        div = link_to "#{f.title}" , product_path(f)

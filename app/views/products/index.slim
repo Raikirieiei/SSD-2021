@@ -24,11 +24,11 @@ eth
           th ID
           th Title
           th Body
-          / th No. Comments
           th Server
           th Stock
           th Created at
           th Updated at
+          / th TAG
           th Action
       tbody
         - @products.each do |a|
@@ -36,11 +36,12 @@ eth
             td = a.id
             td.font-weight-bold = a.title
             td = a.body
-            / td = a.comments.count
             td = a.server
             td = a.stock
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
+            / td = "N/A"
+            / td = a.category_tag
             td
               span
                 = link_to product_path(a) do
@@ -53,9 +54,13 @@ eth
                   = link_to product_path(a), method: :delete, data: { confirm: "Are you sure?" } do
                     i.fas.fa-trash
 -if current_admin
-  div.mb-2
+  span.mb-2
     = link_to new_product_path do
       = button_tag 'Add new Product', class: 'btn btn-primary'
+span.mb-2.float-right
+  = link_to categories_path do
+    = button_tag 'Category', class: 'btn btn-primary'
+
 
 .row
   .col-6
