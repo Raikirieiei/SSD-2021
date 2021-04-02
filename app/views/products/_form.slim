@@ -1,7 +1,9 @@
 = form_with model: product do |f|
   div = f.text_field :title, placeholder: 'Title'
+  div = f.select :status, Product.statuses.map { |key, value| [key.humanize, key] }
   div = f.text_area :body, placeholder: 'Write content here'
   div = f.number_field :stock, placeholder: 'Initial Stock'
   div = f.text_area :server, placeholder: 'Write server here'
+  div = f.collection_check_boxes :category_ids, Category.all, :id, :tag
   div = f.submit 'Submit Product'
 
