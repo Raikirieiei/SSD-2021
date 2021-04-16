@@ -12,7 +12,7 @@
 eth
 .row
   .col.
-    = form_tag categories_path, method: :get do
+    = form_tag admins_categories_path, method: :get do
       = text_field_tag 'search', @search, placeholder: 'Type something',
         class: 'form-control'
 
@@ -33,22 +33,22 @@ eth
             td = a.description
             td
               span
-                = link_to category_path(a) do
+                = link_to admins_category_path(a) do
                   i.fas.fa-eye
               -if current_admin
                 span.ml-3
-                  = link_to edit_category_path(a) do
+                  = link_to edit_admins_category_path(a) do
                     i.fas.fa-pen
                 span.ml-3
-                  = link_to category_path(a), method: :delete, data: { confirm: "Are you sure?" } do
+                  = link_to admins_category_path(a), method: :delete, data: { confirm: "Are you sure?" } do
                     i.fas.fa-trash
   
 -if current_admin
   span.mb-2
-    = link_to new_category_path do
+    = link_to new_admins_category_path do
       = button_tag 'Add new Category', class: 'btn btn-primary'
 span.mb-2.float-right
-  = link_to products_path do
+  = link_to admins_products_path do
     = button_tag 'Products', class: 'btn btn-primary'
 
 .row

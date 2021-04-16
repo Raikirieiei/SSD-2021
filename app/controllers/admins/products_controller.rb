@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class Admins::ProductsController < ApplicationController
   before_action :authenticate_admin!,only: [:admin,:create,:edit,:destroy]
   def index
     @search = params[:search]
@@ -53,6 +53,18 @@ class ProductsController < ApplicationController
     redirect_to action: :index
   end
 
+  def delete_cover_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    redirect_to action: :index
+  end
+
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    redirect_to action: :index
+  end
+
   def csv_upload
     data = params[:csv_file].read.split("\n")
     data.each do |line|
@@ -69,6 +81,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :status, :body, :stock, :server)
+    params.require(:product).permit(:title, :status, :cover_image, :body, :stock, :server, images: [])
   end
 end

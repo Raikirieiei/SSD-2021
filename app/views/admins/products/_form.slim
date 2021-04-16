@@ -1,0 +1,18 @@
+= form_with model: [:admins, product] do |f|
+  div Cover Image
+  div = f.file_field :cover_image
+  - if @product.cover_image.attached?
+    div = link_to 'Remove Cover', delete_cover_attachment_admins_product_url(@product.cover_image.id), method: :delete, data: { confirm: 'Are you sure?' }
+  div = f.text_field :title, placeholder: 'Title'
+  div = f.select :status, Product.statuses.map { |key, value| [key.humanize, key] }
+  div = f.text_area :body, placeholder: 'Write content here'
+  div = f.number_field :stock, placeholder: 'Initial Stock'
+  div = f.text_area :server, placeholder: 'Write server here'
+  div Image 
+  - if @product.images.attached?
+    - @product.images.each do |image|
+      = link_to 'Remove Cover', delete_cover_attachment_admins_product_url(image.id), method: :delete, data: { confirm: 'Are you sure?' }
+  div = f.file_field :images, multiple: true
+  div = f.collection_check_boxes :category_ids, Category.all, :id, :tag
+  div = f.submit 'Submit Product'
+

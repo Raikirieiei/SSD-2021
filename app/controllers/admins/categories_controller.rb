@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Admins::CategoriesController < ApplicationController
   before_action :authenticate_admin!,only: [:admin,:create,:edit,:destroy]
   def index
     @search = params[:search]
