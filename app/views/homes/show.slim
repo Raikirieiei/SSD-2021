@@ -1,0 +1,18 @@
+h1 = @product.title
+div = link_to 'Back', homes_path
+hr
+h3 = "status"
+div = @product.status
+hr
+h3 = "body"
+div = @product.body
+hr
+h3 = "catagories"
+div = @product.categories&.map(&:tag)&.join(',').presence || 'NA'
+hr
+h3 = "server"
+div = @product.server
+hr
+h3 = "stock"
+div = @product.stock
+hr

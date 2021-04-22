@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
-  root 'admins/products#index'
+  root 'homes#index'
   devise_for :admins
 
+  resources :homes
+  
   namespace :admins do
 
     resources :categories do

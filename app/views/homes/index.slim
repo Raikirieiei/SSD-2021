@@ -1,27 +1,17 @@
 .row
   .col
     span.float-right
-      = link_to 'Home', homes_path
+      = link_to 'Admin', admins_products_path
 .row
   .col-6
     h1 Genshin Impact ID Market
-  .col-6
-    .float-right
-      -if current_admin
-        span.ml-3 = current_admin.email
-        span.ml-3 = link_to 'Logout', destroy_admin_session_path , method: :delete
-      -else
-        span.ml-3 = link_to 'Login', admin_session_path
-      
+   
 eth
 .row
   .col.
     = form_tag admins_products_path, method: :get do
       = text_field_tag 'search', @search, placeholder: 'Type something',
         class: 'form-control'
-  .col
-    = link_to admins_products_path(format: :csv) do
-      = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
 
 .row.mt-2
   .col
@@ -29,7 +19,6 @@ eth
       thead.thead-dark
         tr
           th Cover
-          th ID
           th Status
           th Title
           th Body
@@ -46,7 +35,6 @@ eth
             td
               - if a.cover_image.attached?
                 = image_tag a.cover_image, width: '64px'
-            td = a.id
             td = a.status
             td.font-weight-bold = a.title
             td = a.body
@@ -60,34 +48,12 @@ eth
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
             td
               span
-                = link_to admins_product_path(a) do
+                = link_to home_path(a) do
                   i.fas.fa-eye
-              -if current_admin
-                span.ml-3
-                  = link_to edit_admins_product_path(a) do
-                    i.fas.fa-pen
-                span.ml-3
-                  = link_to admins_product_path(a), method: :delete, data: { confirm: "Are you sure?" } do
-                    i.fas.fa-trash
-
--if current_admin
-  span.mb-2
-    = link_to new_admins_product_path do
-      = button_tag 'Add new Product', class: 'btn btn-primary'
-  span.mb-2.float-right
-    = link_to admins_categories_path do
-      = button_tag 'Category', class: 'btn btn-primary'
 
 
 .row
   .col-6
     = paginate @products
 
-div
-  hr
 
-.row
-  .col
-    = form_tag admins_products_csv_upload_path, multipart: true do
-      div = file_field_tag :csv_file
-      div = submit_tag :upload
