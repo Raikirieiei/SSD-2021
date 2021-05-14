@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   
+  resources :orders
   root 'homes#index'
   devise_for :admins
 
-  resources :homes
-  
+  resources :homes do
+    resources :orders
+  end
+
   namespace :admins do
 
     resources :categories do

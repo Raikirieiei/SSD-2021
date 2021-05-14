@@ -22,6 +22,7 @@ eth
   .col
     = link_to admins_products_path(format: :csv) do
       = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
+    
 
 .row.mt-2
   .col
@@ -74,6 +75,8 @@ eth
   span.mb-2
     = link_to new_admins_product_path do
       = button_tag 'Add new Product', class: 'btn btn-primary'
+    = link_to orders_path do
+      = button_tag 'Order list', class: 'btn btn-secondary'
   span.mb-2.float-right
     = link_to admins_categories_path do
       = button_tag 'Category', class: 'btn btn-primary'

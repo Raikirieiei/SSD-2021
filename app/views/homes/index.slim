@@ -19,6 +19,7 @@ eth
       thead.thead-dark
         tr
           th Cover
+          th ID
           th Status
           th Title
           th Body
@@ -28,6 +29,7 @@ eth
           th Images
           th Created at
           th Updated at
+          th Buy
           th Action
       tbody
         - @products.each do |a|
@@ -35,6 +37,7 @@ eth
             td
               - if a.cover_image.attached?
                 = image_tag a.cover_image, width: '64px'
+            td = a.id
             td = a.status
             td.font-weight-bold = a.title
             td = a.body
@@ -46,6 +49,9 @@ eth
                 = image_tag image, width: '32px' 
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
+            td
+              = link_to new_order_path do
+                = button_tag 'Buy Now', class: 'btn btn-primary'
             td
               span
                 = link_to home_path(a) do

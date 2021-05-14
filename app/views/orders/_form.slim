@@ -1,0 +1,7 @@
+= form_with model: order do |f|
+  div Product 
+  div = f.number_field :product_id
+  div Address
+  div = f.text_field :address
+  div = f.submit 'Submit Order'
+

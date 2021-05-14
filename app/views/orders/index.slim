@@ -1,0 +1,31 @@
+.row
+  .col
+    span.float-right
+      = link_to 'Home', homes_path
+.row
+  .col-6
+    h1 I WILL HAVE ORDER
+        
+.row.mt-2
+  .col
+    table.table.table-bordered.table-striped.table-hover
+      thead.thead-dark
+        tr
+          th Product_ID
+          th Address
+      tbody
+        - @orders.each do |a|
+          tr
+            td = a.product_id
+            td = a.address
+            td
+              span
+                = link_to order_path(a) do
+                  i.fas.fa-eye
+              -if current_admin
+                / span.ml-3
+                /   = link_to edit_order_path(a) do
+                /     i.fas.fa-pen
+                span.ml-3
+                  = link_to order_path(a), method: :delete, data: { confirm: "Are you sure?" } do
+                    i.fas.fa-trash
